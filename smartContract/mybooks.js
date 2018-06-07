@@ -6,11 +6,15 @@ var MyBooksItem = function (text) {
         this.value = obj.value;
         this.date = obj.date;
         this.money = obj.money;
+        this.addr = obj.addr;
+        this.remark = obj.remark;
     } else {
         this.key = "";
         this.value = "";
         this.date = "";
         this.money = "";
+        this.addr = "";
+        this.remark = "";
     }
 };
 
@@ -35,13 +39,15 @@ MyBooks.prototype = {
     init: function () {
         console.log('init');
     },
-    save: function (value, money, date) {
+    save: function (value, money, date,addr,remark) {
         var from = Blockchain.transaction.from;
         var myBooksItem = this.repo.get(from);
         if (myBooksItem) {
             myBooksItem.value = JSON.parse(myBooksItem).value + '|-' + value;
             myBooksItem.money = JSON.parse(myBooksItem).money + '|-' + money;
             myBooksItem.date = JSON.parse(myBooksItem).date + '|-' + date;
+            myBooksItem.addr = JSON.parse(myBooksItem).addr + '|-' + addr;
+            myBooksItem.remark = JSON.parse(myBooksItem).remark + '|-' + remark;
             this.repo.put(from, myBooksItem);
         } else {
             myBooksItem = new MyBooksItem();
@@ -49,6 +55,8 @@ MyBooks.prototype = {
             myBooksItem.value = value;
             myBooksItem.money = money;
             myBooksItem.date = date;
+            myBooksItem.addr = addr;
+            myBooksItem.remark = remark;
             this.repo.put(from, myBooksItem);
         }
     },

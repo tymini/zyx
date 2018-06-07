@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+<header id="main">
+    <section class="hero">
+        <div class="container">
+            <div class="row nav-wrapper">
+                <div class="col-md-6 col-sm-6 col-xs-6 text-left" style="font-size: 24px">
+                    <img src="img/a1.png" style="height: 38px;">
+                    自由行开销查询系统
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-left job-menu" style="font-size: 16px">
+                    <div class="item">
+                        <a href="#add" class="animated fadeInUp">记一笔</a>
+                    </div>
+                    <div class="item">
+                        <a href="#info" class="animated fadeInUp">我的自由行</a>
+                    </div>
+                    <div class="item">
+                        <a href="javascript:void(0)" class="animated fadeInUp" onclick="about()">介绍</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row hero-content">
+                <div class="col-md-12 text-center">
+                    <h2 class="animated fadeInDown" style="margin-top: 80px">不知道旅游时钱花在哪了？去哪花的最多/最少？</h2>
+                    <a href="#info" class="read-btn animated fadeInUp" style="overflow:hidden;display: none"
+                       id="createAccount">开始</a>
+
+                    <h1 id="noExtension" style="display: none">请安装
+                        <a target="_blank"
+                           href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> 再使用</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+<section class="services-list" id="info">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4 feature-3 wp2 delay-05s">
+                    <div class="feature-content">
+                        <img src="img/b.png" alt="">
+                        <h1>简单</h1>
+                        <p>基于钱包地址，无需注册</p>
+                    </div>
+                </div>
+                <div class="col-md-4 feature-1 wp2">
+                    <div class="feature-content">
+                        <img src="img/a.png" alt="">
+                        <h1>安全</h1>
+                        <p>基于新一代公链星云链加密</p>
+                    </div>
+                </div>
+                <div class="col-md-4 feature-2 wp2 delay-1s">
+                    <div class="feature-content">
+                        <img src="img/c.png" alt="">
+                        <h1>私密</h1>
+                        <p>基于钱包免实名档案</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="set" class="container page-section">
+    <div class="inner contact wp2 delay-05s">
+        <!-- <div class="contact-form" style="overflow:hidden;display: none" id="createAccount">
+             <div class="relative fullwidth col-xs-12">
+                 <button id="search" class="form-btn semibold">开始</button>
+             </div>
+             <div class="clear"></div>
+         </div>-->
+        <div class="myAccount" style="width: 100%;height:0;overflow:hidden;">
+            <h2 class="text-center" style="margin-bottom: 20px;">自由行开销报表</h2>
+            <table class="table table-bordered" style="margin-bottom: 80px;">
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>地点项目</th>
+                    <th>消费类型</th>
+                    <th>消费金额</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="l in list">
+                    <th  v-html="l.date"></th>
+                    <td v-html="l.addr"></td>
+                    <td v-html="l.value"></td>
+                    <td v-html="l.money+'元'"></td>
+                    <td v-html="l.remark"></td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div style="overflow: hidden">
+                <div id="main2" style="width: 50%;height:400px;float: left;"></div>
+                <div id="main1" style="width: 50%;height:400px;float: left;"></div>
+            </div>
+        </div>
+
+        <form id="add" class="form-horizontal" style="margin-top: 50px; display: none">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" id="xfDate" placeholder="请选择时间">
+                </div>
+                <label class="col-sm-2 control-label">地点项目</label>
+                <div class="col-sm-4">
+                    <input type="email" class="form-control" id="addr" placeholder="地点">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">消费类型</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="xfType">
+                        <option value="0">请选择</option>
+                        <option value="1">衣</option>
+                        <option value="2">食</option>
+                        <option value="3">住</option>
+                        <option value="4">行</option>
+                        <option value="5">其他</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 control-label">消费金额</label>
+                <div class="col-sm-4">
+                    <input type="number" id="money" class="form-control" placeholder="请输入消费金额">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="remark" placeholder="备注">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="push" class="btn btn-primary" style="width:100px">保存</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</section>
+<footer id="about" class="footer">
+    <section id="site-socials" class="no-padding white-bg">
+        <div class="site-socials inner no-padding">
+            <div class="address socials animated fadeInRight visible" data-animation="fadeInRight"
+                 data-animation-delay="500">
+                <p>Copyright &copy; 2018.基于新一代区块链公链
+                    <a href="https://nebulas.io/" target="_blank">NAS</a>
+                </p>
+            </div>
+        </div>
+    </section>
+</footer>
+
+<script src=js/nebPay.js></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/echarts.min.js"></script>
+<script>
+    $(function () {
+        var NebPay = require("nebpay");
+        var nebPay = new NebPay();
+
+        var dappAddress = "n1iXyfn2zaKZVJ1qZgrnnedGF7hyh2XVjsC";
+        //检查扩展是否已安装
+        //如果安装了扩展，var“webExtensionWallet”将被注入到web页面中1
+        setTimeout(function () {
+            if (typeof (webExtensionWallet) === "undefined") {
+                //alert ("扩展钱包未安装，请先安装.")
+                $("#noExtension").show();
+            }
+        }, 500);
+
+        var hasAccount = false;
+
+        function search() {
+            var to = dappAddress;
+            var value = "0";
+            var callFunction = "get";
+            var callArgs = [];
+            //callArgs.push(token);
+            nebPay.simulateCall(to, value, callFunction, JSON.stringify(callArgs), {
+                listener: cbSearch
+            });
+        }
+
+        search();
+        setInterval(function () {
+            search();
+        }, 10 * 1000);
+
+        $('#createAccount').on('click', function () {
+            $(this).hide();
+            search();
+            $('.form-horizontal').show();
+            $('.myAccount').css('height', '0');
+            hasAccount = true;
+        });
+
+        function cbSearch(resp) {
+            var result = resp.result
+            if (result === 'null' || result == '') {
+                if (!hasAccount) {
+                    $('#createAccount').show();
+                }
+            } else {
+                $('.form-horizontal').show();
+                $('.myAccount').css('height', 'auto');
+
+
+
+                var resultObj = JSON.parse(result);
+                var len = resultObj.value.split('|-').length;
+                var obj = [];
+                var obj2=[];
+                for (var i = 0; i < len; i++) {
+                    var temp = {};
+                    temp.value = resultObj.money.split('|-')[i];
+                    temp.name = getChartName(resultObj.value.split('|-')[i]);
+                    obj.push(temp);
+
+                    var temp2 = {
+                        date: resultObj.date.split('|-')[i],
+                        addr: resultObj.addr.split('|-')[i],
+                        value: getChartName(resultObj.value.split('|-')[i]),
+                        money: resultObj.money.split('|-')[i],
+                        remark:resultObj.remark.split('|-')[i]
+                    }
+                    obj2.push(temp2);
+                }
+                Vue.set(app, 'list', obj2);
+                var xAxis = [];
+                var yAxis = [];
+                for (var i = 0; i < len; i++) {
+                    xAxis.push(resultObj.date.split('|-')[i])
+                    yAxis.push(resultObj.money.split('|-')[i])
+                }
+                myChart.setOption({
+                    title: {
+                        text: '开销比例',
+                    },
+                    series: [{data: obj}]
+                });
+
+                myChart2.setOption({
+                    title: {
+                        text: '开销对比',
+                    },
+                    xAxis: {
+                        data: xAxis
+                    },
+                    series: [{data: yAxis}]
+                });
+            }
+        }
+
+        $("#push").click(function () {
+            var xfType = $('#xfType').val();
+            var money = $('#money').val();
+            var xfDate = $('#xfDate').val();
+            var addr = $('#addr').val();
+            var remark = $('#remark').val();
+            if (xfType == '0') {
+                layer.msg('消费类型不能为空');
+                return;
+            } else if (money == '') {
+                layer.msg('消费金额不能为空');
+                return;
+            } else if (xfDate == '') {
+                layer.msg('时间不能为空');
+                return;
+            }else if (addr == '') {
+                layer.msg('地点项目不能为空');
+                return;
+            }
+            var to = dappAddress;
+            var value = "0";
+            var callFunction = "save"
+            var callArgs = [];
+            callArgs.push(xfType.toString());
+            callArgs.push(money.toString());
+            callArgs.push(xfDate);
+            callArgs.push(addr);
+            callArgs.push(remark.toString());
+            nebPay.call(to, value, callFunction, JSON.stringify(callArgs), {
+                listener: cbPush
+            });
+        });
+
+        function cbPush(resp) {
+            console.log("response of push: " + resp)
+        }
+
+        function getChartName(value) {
+            if (value == 1) {
+                return '衣';
+            } else if (value == 2) {
+                return '食';
+            } else if (value == 3) {
+                return '住';
+            } else if (value == 4) {
+                return '行';
+            } else if (value == 5) {
+                return '其他';
+            }
+        }
+
+        var myChart = echarts.init(document.getElementById('main1'));
+        var option = {
+            title: {
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            calculable: true,
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: []
+            },
+            series: [
+                {
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: [
+                        {value: 335, name: '衣服'},
+                        {value: 310, name: '食物'},
+                        {value: 234, name: '住'},
+                        {value: 135, name: '行'},
+                        {value: 1548, name: '其他'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        //-------------------------------------------------
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        var option2 = {
+            title: {
+                text: '这是账本示例'
+            },
+            color: ['#57607e'],
+            tooltip: {},
+            legend: {
+                data: ['消费']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            calculable: true,
+            xAxis: {
+                data: ['2018-05-16', '2018-05-17', '2018-05-18', '2018-05-19', '2018-05-20']
+            },
+            yAxis: {},
+            series: [{
+                name: '消费',
+                type: 'line',
+                data: [120, 55, 68, 232, 566]
+            }]
+        };
+        myChart.setOption(option);
+        myChart2.setOption(option2);
+
+    })
+</script>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+    function about() {
+        layer.alert('这是一个记录自由行开销查询统计的工具，可生成多种统计报表，一目了然帮助你规划管理。<br>当前版本：1.0.1', {
+            skin: 'layer-ext-moon'
+        })
+    }
+
+    var app = new Vue({
+        el: '#set',
+        data: {
+            list: []
+        }
+    });
+</script>
+</body>
+
+</html>
