@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row nav-wrapper">
                 <div class="col-md-6 col-sm-6 col-xs-6 text-left" style="font-size: 24px">
-                    自由行开销查询工具
+                    独独自由行管理工具
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 text-left job-menu" style="font-size: 16px">
                     <div class="item">
@@ -42,8 +42,7 @@
             </div>
             <div class="row hero-content">
                 <div class="col-md-12 text-center">
-                    <h2 class="animated fadeInDown" style="margin-top: 80px">不知道旅游时钱花在哪了？去哪花的最多/最少？</h2>
-                    <a href="#info" class="read-btn animated fadeInUp" style="overflow:hidden;display: none"
+                    <a href="#info" class="read-btn animated fadeInUp" style="overflow:hidden;margin-top: 130px;border-radius: 30px"
                        id="createAccount">开始</a>
 
                     <h1 id="noExtension" style="display: none">请安装
@@ -57,6 +56,7 @@
 <section class="services-list" id="info">
     <div class="container">
         <div class="row">
+            <h2 class="animated fadeInDown" style="margin-top: 20px;color: #333;text-align: center;margin-bottom: 50px;">自由行是探索未知，我们让开销了如指掌，基于新一代区块链公链的自由行管理工具</h2>
             <div class="col-md-12">
                 <div class="col-md-4 feature-3 wp2 delay-05s">
                     <div class="feature-content">
@@ -191,7 +191,7 @@
         var NebPay = require("nebpay");
         var nebPay = new NebPay();
 
-        var dappAddress = "n1iXyfn2zaKZVJ1qZgrnnedGF7hyh2XVjsC";
+        var dappAddress = "n22xVeaAz24WCi27pZ7NKn7a4hTg4dJYxsU";
         //检查扩展是否已安装
         //如果安装了扩展，var“webExtensionWallet”将被注入到web页面中1
         setTimeout(function () {
@@ -200,7 +200,6 @@
                 $("#noExtension").show();
             }
         }, 500);
-
         var hasAccount = false;
 
         function search() {
@@ -423,7 +422,7 @@
 
 
     function about() {
-        layer.alert('这是一个记录自由行开销查询统计的工具，可生成多种统计报表，一目了然帮助你规划管理。<br>当前版本：1.0.1', {
+        layer.alert('这是一个记录自由行开销管理工具，可生成多种统计报表，一目了然帮助你规划管理自由行中的开销。<br>当前版本：1.0.2<br>作者：龙猫', {
             skin: 'layer-ext-moon'
         })
     }
